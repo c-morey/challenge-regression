@@ -1,8 +1,8 @@
 import pandas as pd
 
 
-# read data file housing_data.csv created in May 2021 with Jesus
-# (see https://github.com/jejobueno/challenge-collecting-data)
+# read data file houses_1.csv created in June 2021 by Solan Delvenne
+# (see https://github.com/ ...)
 def raw_and_add_admin():
     '''
     Import of raw data and merge with admin. infos (city, region, province)

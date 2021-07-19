@@ -29,6 +29,12 @@ plt.pie(ds.type.value_counts(normalize=True).values,
 plt.savefig("assets/" + datetime.now().strftime("%Y%m%d_%I%M%S%p") + "_" + "type_properties.png", transparent=True)
 plt.show()
 
+plt.title('Subtype of properties')
+plt.pie(ds.subtype.value_counts(normalize=True).values,
+        labels=ds.subtype.value_counts(normalize=True).index.values, startangle=90, autopct='%1.1f%%')
+plt.savefig("assets/" + datetime.now().strftime("%Y%m%d_%I%M%S%p") + "_" + "subtype_properties.png", transparent=True)
+plt.show()
+
 '''
 plt.title('Equipped kitchen or not')
 plt.pie(ds.FullyEquippedKitchen.value_counts(normalize=True).values,

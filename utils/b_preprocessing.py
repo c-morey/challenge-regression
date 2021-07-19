@@ -19,13 +19,25 @@ def preprocess():
     print(ds.shape)
 
     # Keeping only last row for rows having same city, price, #rooms and area
-    ds.drop_duplicates(['location', 'price', 'area', 'room_number'], keep='last', inplace=True, ignore_index=True)
-    print('Data after dropping duplicates zip/price/area/bedrooms)')
+    ds.drop_duplicates(['location','type','subtype','price','room_number','area'], keep='first', inplace=True, ignore_index=True)
+    print('Data after dropping duplicates zip/type/subtype/price/area/bedrooms)')
     print(ds.shape)
 
     # price/square meter new feature
     ds['priceSqMeter'] = ds.price/ds.area
     print('Data with additional feature')
+    print(ds.shape)
+
+    # prices between 80k€ and 2M€
+    ds = ds[(80000 <= ds.price) & (ds.price <= 2e6)]
+
+    # no grouped properties
+    ds = ds[~ds['subtype'].isin(['MIXED_USE_BUILDING', 'APARTMENT_BLOCK'])]
+
+    # bedrooms <15
+    ds = ds[ds.room_number < 15]
+
+    print('Data after complete cleaning')
     print(ds.shape)
 
     return ds
