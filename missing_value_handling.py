@@ -1,33 +1,5 @@
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
 
-#Read the dataset
-ds= pd.read_csv('/Users/cerenmorey/Desktop/BeCode/challenge-regression/output_ds.csv')
-
-#Drop the first column Unnamed:0
-ds= ds.drop('Unnamed: 0', axis=1)
-
-#Identify the inputs and target column for training the model
-
-input_columns = list(ds)
-input_columns.pop(3) #Removes the column 'price' from the list
-
-target_column = ds['price'] #Target to predict
-
-#Making them a dataframe
-inputs_df = ds[input_columns].copy()
-target = target_column.to_frame()
-
-#Identifying numeric and categorical data
-numeric_cols = inputs_df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-categorical_cols = inputs_df.select_dtypes(include='object').columns.tolist()
-
-# Identify the missing values of numeric columns
-missing_counts = inputs_df[numeric_cols].isna().sum().sort_values(ascending=False)
-missing_counts[missing_counts > 0]
-
-#Convert missing values with median score
+#Convert missing values with median score for terrace and garden area, and facade count
 #Creating new columns for median scores (except the land_surface column)
 ds['median_terrace_area'] = np.nan
 ds['median_garden_area'] = np.nan
